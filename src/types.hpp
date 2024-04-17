@@ -86,13 +86,20 @@ namespace tgui {
 	};
 	inline const std::unordered_map<tgui::proto0::TouchEvent::Action, tgui_touch_action> TouchActionPBToPublic = invert(TouchActionPublicToPB);
 	
-	
+	inline const std::unordered_map<tgui_mouse_action, tgui::proto0::MouseEvent::Action> MouseActionPublicToPB = {
+		{TGUI_MOUSE_HOVER_ENTER, tgui::proto0::MouseEvent::hoverEnter},
+		{TGUI_MOUSE_HOVER_EXIT, tgui::proto0::MouseEvent::hoverExit},
+		{TGUI_MOUSE_HOVER_MOVE, tgui::proto0::MouseEvent::hoverMove},
+		{TGUI_MOUSE_BUTTON_PRESS, tgui::proto0::MouseEvent::buttonPress},
+		{TGUI_MOUSE_BUTTON_RELEASE, tgui::proto0::MouseEvent::buttonRelease},
+	};
+	inline const std::unordered_map<tgui::proto0::MouseEvent::Action, tgui_mouse_action> MouseActionPBToPublic = invert(MouseActionPublicToPB);
+
 	inline const std::unordered_map<tgui_gravity, tgui::proto0::SetGravityRequest::Gravity> GravityPublicToPB = {
 		{TGUI_GRAV_CENTER, tgui::proto0::SetGravityRequest::CENTER},
 		{TGUI_GRAV_LEFTTOP, tgui::proto0::SetGravityRequest::LEFTTOP},
 		{TGUI_GRAV_RIGHTBOTTOM, tgui::proto0::SetGravityRequest::RIGHTBOTTOM},
 	};
-	
 	
 	inline const std::unordered_map<tgui_direction, tgui::proto0::Direction> DirectionPublicToPB = {
 		{TGUI_DIR_ALL, tgui::proto0::ALL},

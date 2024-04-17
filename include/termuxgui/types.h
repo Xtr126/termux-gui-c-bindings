@@ -313,8 +313,9 @@ typedef enum {
 	TGUI_EVENT_INSET = 37,
 	/// The Surface of a SurfaceView changed size.
 	TGUI_EVENT_SURFACE_CHANGED = 38,
-	
-	
+	TGUI_EVENT_MOUSE = 39,	
+
+
 	/// Maximum value for future binary compatibility.
 	TGUI_EVENT_TYPE_MAX = 1 << 31,
 } tgui_event_type;
@@ -565,7 +566,6 @@ typedef enum {
 	TGUI_TOUCH_MOVE = 5,
 } tgui_touch_action;
 
-
 /**
  * @brief A single pointer of a touch event.
  */
@@ -578,6 +578,20 @@ typedef struct {
 	int id;
 } tgui_touch_pointer;
 
+typedef enum {
+	TGUI_MOUSE_HOVER_ENTER = 0,
+	TGUI_MOUSE_HOVER_EXIT = 1,
+	TGUI_MOUSE_HOVER_MOVE = 2,
+	TGUI_MOUSE_BUTTON_PRESS = 3,
+	TGUI_MOUSE_BUTTON_RELEASE = 4,
+} tgui_mouse_action;
+
+typedef struct {
+	/// @brief The x coordinate in the View.
+	int x;
+	/// @brief The y coordinate in the View.
+	int y;
+} tgui_mouse_pointer;
 
 /// @brief The types of insets of an Activity that can be shown or hidden.
 typedef enum {
@@ -706,6 +720,19 @@ typedef struct {
 			/// Timestamp of the event.
 			uint64_t time;
 		} touch;
+		/// Valid for `TGUI_EVENT_MOUSE`.
+		struct {
+			/// The id of the View.
+			int id;
+			/// The type of mouse event.
+			tgui_mouse_action action;
+			/// The [Android button constant](https://developer.android.com/reference/android/view/MotionEvent).
+			int button;
+			/// The pointer of the mouse event.
+			tgui_mouse_pointer pointer;
+			/// Timestamp of the event.
+			uint64_t time;
+		} mouse;
 		/// Valid for `TGUI_EVENT_TEXT`.
 		struct {
 			/// The id of the TextView.

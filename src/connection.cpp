@@ -264,6 +264,17 @@ extern "C" {
 			event.touch.index = e.index();
 			event.touch.time = e.time();
 			
+		} else if (ev.event_case() == Event::kMouse) {
+			const MouseEvent& e = ev.mouse();
+			event.type = TGUI_EVENT_MOUSE;
+			event.activity = e.v().aid();
+			event.mouse.id = e.v().id();
+			event.mouse.action = MouseActionPBToPublic.at(e.action());
+			event.mouse.button = e.button();
+			event.mouse.pointer.x = e.pointer().x();
+			event.mouse.pointer.y = e.pointer().y();
+			event.mouse.time = e.time();
+			
 		} else if (ev.event_case() == Event::kText) {
 			const TextEvent& e = ev.text();
 			event.type = TGUI_EVENT_TEXT;
